@@ -1,0 +1,279 @@
+create table Cliente(
+Idcliente int not null primary key,
+telefone int,
+cpf varchar (12) not null,
+email varchar (30),
+rg varchar (7) not null,
+endereco varchar (60),
+Nconta int not null,
+Idempr int
+);
+ 
+create table Funcionario(
+Idfunc int not null primary key,
+cargo varchar (15)not null,
+"datanasc" date,
+email varchar (30),
+enedereco varchar (60),
+nome varchar (45) not null,
+telefone int,
+salario int not null,
+"datacontr" date not null,
+idagenc int not null,
+idinv int
+);
+ 
+Create table contabancaria(
+nconta int not null primary key,
+tipo varchar (20),
+saldo int,
+dataabertura date
+idcliente int not null,
+idtransacao int
+);
+ 
+create table contapoupança(
+tarifamanutencao varchar (30) primary key,
+chequeespecial varchar (30),
+"dataaniversario" date not null,
+taxajuros int,
+limitecredito int,
+idagenc int not null
+);
+create table contacorrente(
+"dataaniversaio" date not null primary key,
+chequeespecial varchar (30),
+limitecredito int,
+taxajuros int,
+tarifamanutencao varchar (30),
+idagenc int not null
+);
+ 
+create table agenciabanc(
+idagenc int not null primary key,
+nome varchar (30) not null,
+telefone int not null,
+eneedereco varchar (60) not null,
+email varchar(30),
+horario varchar(45) not null
+idfunc int not null,
+idtransacao int,
+idempr int,
+tarifamanutencao varchar (30),
+“dataaniversario” date
+);
+ 
+create table transacao(
+idtransacao int not null primary key,
+"data" date not null,
+tipo varchar (30) not null,
+valor int not null,
+desrcicao varchar (30),
+Nconta int not null,
+Idagenc int
+);
+create table investimento(
+idinv int not null primary key,
+tipo varchar (30) not null,
+valor int not null,
+"datacompra" date not null,
+"datavenc" date not null,
+desrcicao varchar (30),
+Idclient int not null,
+Idfunc int not null
+);
+ 
+create table emprestimo(
+Idempr int not null primary key,
+taxajuros int,
+Nconta int not null,
+status varchar (30) not null,
+tipo varchar (30),
+"datasolicitacao" date
+Idcliente int not null
+Idagenc int not null
+);
+
+DML
+insert into cliente
+(Idcliente,telefone,cpf,email,rg,endereço, nconta)
+values
+('1', '9999991', '000000000001', 'anderson17@gmail.com', '0000001',' rua alameda dos anjos 714, apto 604', ‘111’);
+ 
+insert into cliente
+(Idcliente,telefone,cpf,email,rg,endereço, nconta, idempr)
+values
+('2','9999992','000000000002','Savinho0783@gmail.com','0000002','rua jose das caldas 073','112','032');
+insert into cliente
+(Idcliente,telefone,cpf,email,rg,endereço, nconta)
+values
+(‘3’,’9999993’,’000000000003’,’Toninho117@yahoo.com.br’,’0000003’,’rua alameda dos anjos 714, apto 601’, ‘113’);
+ 
+insert into cliente
+(Idcliente,telefone,cpf,email,rg,endereço, nconta, idempr)
+values
+(‘4’,’9999994’,’000000000004’,’Clarasantiago00@yahoo.com.br’,’0000004’,’rua alameda dos anjos 714, 604’,’114’,’034’);
+ 
+insert into cliente
+(Idcliente,telefone,cpf,email,rg,endereço, nconta)
+values
+('5','9999995','000000000005','cainaespiuca1708@gmail.com','0000005','rua alameda dos anjos 714, apto 601','115');
+ 
+ 
+insert into cliente
+(Idcliente,telefone,cpf,email,rg,endereço, nconta, idempr)
+values
+('6','9999996','000000000006','mateusoliveira@gmail.com','0000006','rua alameda dos anjos 714, apto 603','116','036');
+ 
+insert into funcionario
+(Idfunc, cargo, datanasc, email, enedereco, nome, telefone, salario, datacontr,idagenc, idempr)
+values
+('01','estagiário','1999-01-01','Rickelmealexander@yahoo.com.br','Av. Recife 803, apto 801','Rickelme alexandeer','9999981','1250','2023-05-17','001', ‘032’);
+ 
+insert into funcionario
+(Idfunc, cargo, datanasc, email, enedereco, nome, telefone, salario, datacontr,idagenc, idempr)
+values
+('02','estagiário','1997-01-01','Rilari0807@gmail.com','Av. Recife 913, apto 501, bloco B ','Rilary silva','9999982','1250','2023-01-13','001', ‘034’);
+ 
+insert into funcionario
+(Idfunc, cargo, datanasc, email, enedereco, nome, telefone, salario, datacontr,idagenc, idempr)
+values
+('03','Gerente','1997-02-022','Matheuss@yahoo.com.br','Av. Recife 914, apto 502','Matheus santos','99999823','7300','2021-01-13','001', ‘036’);
+ 
+insert into funcionario
+(Idfunc, cargo, datanasc, email, enedereco, nome, telefone, salario, datacontr,idagenc)
+
+values
+('04','Gerente','1987-05-022','Fabsilva@yahoo.com.br','Rua dr, aniceto varejão 702, apto 101','Fabiola Silva','99999753','6900','2021-01-13','002');
+ 
+insert into funcionario
+(Idfunc, cargo, datanasc, email, enedereco, nome, telefone, salario, datacontr,idagenc)
+values
+('05','estagiário','1999-05-022','Andersonnunes@yahoo.com.br','Rua dr, aniceto varejão 904, apto 105','Anderson nunes','99995753','1300','2023-01-13','002');
+ 
+ 
+ 
+ 
+ 
+insert into contabancaria
+(tipo, saldo,dataabertura,nconta,idcliente,idtransacao)
+values
+('Contacorrete','938','2022-02-01','111','1','901')
+ 
+insert into contabancaria
+(tipo, saldo,dataabertura,nconta,idcliente,idtransacao)
+values
+('Contapoupança','1030','2022-05-01','112','2','902')
+ 
+insert into contabancaria
+(tipo, saldo,dataabertura,nconta,idcliente,idtransacao)
+values
+('Contacorrente','2950','2021-05-01','113','3','903')
+ 
+insert into contabancaria
+(tipo, saldo,dataabertura,nconta,idcliente)
+values
+('Contapoupança','95','2021-05-07','114','4')
+ 
+insert into contabancaria
+(tipo, saldo,dataabertura,nconta,idcliente)
+values
+('Contacorrentee','9500','2019-05-07','115','5')
+ 
+insert into contabancaria 
+(tipo, saldo,dataabertura,nconta,idcliente)
+values
+('Contapoupança','120','2023-05-07','116','6')
+ 
+insert into contapoupança
+(chequeespecial,dataaniversario,taxajuros,limitecredito,tarifamanutencao,idagenc)
+values
+('cheque 800','1984-02-03','2','980','tarifa 130','001')
+ 
+insert into contapoupança
+(chequeespecial,dataaniversario,taxajuros,limitecredito,tarifamanutencao,idagenc)
+values
+('cheque 720','1999-02-03','2','1030','tarifa 115','002')
+ 
+insert into contapoupança
+(chequeespecial,dataaniversario,taxajuros,limitecredito,tarifamanutencao,idagenc)
+values
+('cheque 720','1995-02-03','2','8000','tarifa 110','001')
+ 
+insert into contacorrente
+(dataaniversaio,chequeespecial,limitecredito,taxajuros,tarifamanutencao,idagenc)
+values
+('1999-04-05','cheque 800','980','2','130','001')
+ 
+insert into contacorrente
+(dataaniversaio,chequeespecial,limitecredito,taxajuros,tarifamanutencao,idagenc)
+values
+('1999-03-05','cheque 800','1250','2','99','002')
+ 
+ 
+ 
+ 
+insert into contacorrente
+(dataaniversaio,chequeespecial,limitecredito,taxajuros,tarifamanutencao,idagenc)
+Values
+('2000-03-05','cheque 800','1250','2','89','001')
+ 
+Insert into agenciabanc
+(idagenc,Nome,telefone,eneedereco,email,Horario,idfunc,idtransacao,idempr,tarifamanutencao, dataaniversario)
+Values
+('1','agencia uno','87028922','rua bananil','Agenciauno@gmail.com','01','01','1','001','224','10,04,2023');
+ 
+Insert into agenciabanc
+(idagenc,Nome,telefone,eneedereco,email,Horario,idfunc,idtransacao,idempr,tarifamanutencao, dataaniversario)
+Values
+('2','agencia two','87696924','rua bostil','Agencitwo@gmail.com','02','02','2','002','324','10,05,2022');
+ 
+Insert into agenciabanc
+(idagenc,Nome,telefone,eneedereco,email,Horario,idfunc,idtransacao,idempr,tarifamanutencao, dataaniversario)
+Values
+('3','agencia third','87695438','rua bostil','Agencitwo@gmail.com','03','03','3','003','424','10,05,2021');
+ 
+Insert into emprestimo
+(idempr,taxajuros,Nconta,status,tipo,"datasolicitacao",Idcliente,idagenc)
+values
+('1','244','1','ativo','consignado','05-10-2023','1','1');
+ 
+Insert into emprestimo
+(idempr,taxajuros,Nconta,status,tipo,"datasolicitacao",Idcliente,idagenc)
+values
+('2','354','2','ativo','consignado','06-03-2022','2','2');
+ 
+Insert into emprestimo
+(idempr,taxajuros,Nconta,status,tipo,"datasolicitacao",Idcliente,idagenc)
+values
+('3','354','3','ativo','consignado','04-02-2023','3','3');
+ 
+insert into investimento
+(idinv,tipo,valor,"datacompra","datavenc",desrcicao,Idclient,Idfunc)
+Values
+('01','Fundos de Investimentos','2779','01-02-2023','01-02-2077','alguma coisa','1','01');
+ 
+insert into investimento
+(idinv,tipo,valor,"datacompra","datavenc",desrcicao,Idclient,Idfunc)
+Values
+('02','Fundos de Investimentos','2222','05-03-2024','05-03-2099','alguma coisa','2','02');
+ 
+insert into investimento
+(idinv,tipo,valor,"datacompra","datavenc",desrcicao,Idclient,Idfunc)
+Values
+('03','Fundos de Investimentos','2333','03-04-2023','02-04-2033','alguma coisa','3','03');
+ 
+insert into transacao
+(idtransacao,"data", tipo, valor, desrcicao, Nconta, Idagenc)
+Values
+('01','01-10-2023','DOC','34566','alguma descrição','1','1');
+ 
+insert into transacao
+(idtransacao,"data", tipo, valor, desrcicao, Nconta, Idagenc)
+Values
+('02','03-09-2023','DOC','54346','alguma descrição','2','2');
+ 
+insert into transacao
+(idtransacao,"data", tipo, valor, desrcicao, Nconta, Idagenc)
+Values
+('03','05-04-2023','TED','54346','alguma descrição','3','3');
