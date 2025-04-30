@@ -1,122 +1,156 @@
--- Criação do banco de dados
+-- CRIAÇÃO DO BANCO DE DADOS
 CREATE DATABASE SilverBank;
 USE SilverBank;
 
--- Tabelas
+-- TABELAS
 CREATE TABLE Cliente (
-    Idcliente INT NOT NULL PRIMARY KEY,
-    telefone VARCHAR(15),
-    cpf VARCHAR(12) NOT NULL,
-    email VARCHAR(30),
-    rg VARCHAR(10) NOT NULL,
-    endereco VARCHAR(60),
-    Nconta INT NOT NULL,
-    Idempr INT
+  IdCliente INT NOT NULL PRIMARY KEY,
+  Telefone VARCHAR(15),
+  CPF VARCHAR(12) NOT NULL,
+  Email VARCHAR(30),
+  RG VARCHAR(10) NOT NULL,
+  Endereco VARCHAR(100),
+  NConta INT NOT NULL,
+  IdEmpr INT
 );
 
 CREATE TABLE Funcionario (
-    Idfunc INT NOT NULL PRIMARY KEY,
-    cargo VARCHAR(15) NOT NULL,
-    datanasc DATE,
-    email VARCHAR(30),
-    endereco VARCHAR(60),
-    nome VARCHAR(45) NOT NULL,
-    telefone VARCHAR(15),
-    salario INT NOT NULL,
-    datacontr DATE NOT NULL,
-    idagenc INT NOT NULL,
-    idinv INT
+  IdFunc INT NOT NULL PRIMARY KEY,
+  Cargo VARCHAR(30) NOT NULL,
+  DataNasc DATE,
+  Email VARCHAR(30),
+  Endereco VARCHAR(100),
+  Nome VARCHAR(45) NOT NULL,
+  Telefone VARCHAR(15),
+  Salario DECIMAL(10,2) NOT NULL,
+  DataContr DATE NOT NULL,
+  IdAgenc INT NOT NULL,
+  IdInv INT
 );
 
 CREATE TABLE ContaBancaria (
-    Nconta INT NOT NULL PRIMARY KEY,
-    tipo VARCHAR(20),
-    saldo INT,
-    dataabertura DATE,
-    idcliente INT NOT NULL,
-    idtransacao INT
+  NConta INT NOT NULL PRIMARY KEY,
+  Tipo VARCHAR(20),
+  Saldo DECIMAL(12,2),
+  DataAbertura DATE,
+  IdCliente INT NOT NULL,
+  IdTransacao INT
 );
 
 CREATE TABLE ContaPoupanca (
-    tarifamanutencao VARCHAR(30) PRIMARY KEY,
-    chequeespecial VARCHAR(30),
-    dataaniversario DATE NOT NULL,
-    taxajuros INT,
-    limitecredito INT,
-    idagenc INT NOT NULL
+  TarifaManutencao VARCHAR(30) PRIMARY KEY,
+  ChequeEspecial VARCHAR(30),
+  DataAniversario DATE NOT NULL,
+  TaxaJuros DECIMAL(5,2),
+  LimiteCredito DECIMAL(12,2),
+  IdAgenc INT NOT NULL
 );
 
 CREATE TABLE ContaCorrente (
-    idcorrente INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    dataaniversario DATE NOT NULL,
-    chequeespecial VARCHAR(30),
-    limitecredito INT,
-    taxajuros INT,
-    tarifamanutencao VARCHAR(30),
-    idagenc INT NOT NULL
+  DataAniversario DATE NOT NULL PRIMARY KEY,
+  ChequeEspecial VARCHAR(30),
+  LimiteCredito DECIMAL(12,2),
+  TaxaJuros DECIMAL(5,2),
+  TarifaManutencao VARCHAR(30),
+  IdAgenc INT NOT NULL
 );
 
 CREATE TABLE AgenciaBanc (
-    idagenc INT NOT NULL PRIMARY KEY,
-    nome VARCHAR(30) NOT NULL,
-    telefone VARCHAR(15) NOT NULL,
-    endereco VARCHAR(60) NOT NULL,
-    email VARCHAR(30),
-    horario VARCHAR(45) NOT NULL,
-    idfunc INT NOT NULL,
-    idtransacao INT,
-    idempr INT,
-    tarifamanutencao VARCHAR(30),
-    dataaniversario DATE
+  IdAgenc INT NOT NULL PRIMARY KEY,
+  Nome VARCHAR(30) NOT NULL,
+  Telefone VARCHAR(15) NOT NULL,
+  Endereco VARCHAR(100) NOT NULL,
+  Email VARCHAR(30),
+  Horario VARCHAR(45) NOT NULL,
+  IdFunc INT NOT NULL,
+  IdTransacao INT,
+  IdEmpr INT,
+  TarifaManutencao VARCHAR(30),
+  DataAniversario DATE
 );
 
 CREATE TABLE Transacao (
-    idtransacao INT NOT NULL PRIMARY KEY,
-    data DATE NOT NULL,
-    tipo VARCHAR(30) NOT NULL,
-    valor INT NOT NULL,
-    descricao VARCHAR(30),
-    Nconta INT NOT NULL,
-    idagenc INT
+  IdTransacao INT NOT NULL PRIMARY KEY,
+  Data DATE NOT NULL,
+  Tipo VARCHAR(30) NOT NULL,
+  Valor DECIMAL(12,2) NOT NULL,
+  Descricao VARCHAR(100),
+  NConta INT NOT NULL,
+  IdAgenc INT
 );
 
 CREATE TABLE Investimento (
-    idinv INT NOT NULL PRIMARY KEY,
-    tipo VARCHAR(30) NOT NULL,
-    valor INT NOT NULL,
-    datacompra DATE NOT NULL,
-    datavenc DATE NOT NULL,
-    descricao VARCHAR(30),
-    Idcliente INT NOT NULL,
-    Idfunc INT NOT NULL
+  IdInv INT NOT NULL PRIMARY KEY,
+  Tipo VARCHAR(30) NOT NULL,
+  Valor DECIMAL(12,2) NOT NULL,
+  DataCompra DATE NOT NULL,
+  DataVenc DATE NOT NULL,
+  Descricao VARCHAR(100),
+  IdClient INT NOT NULL,
+  IdFunc INT NOT NULL
 );
 
 CREATE TABLE Emprestimo (
-    Idempr INT NOT NULL PRIMARY KEY,
-    taxajuros INT,
-    Nconta INT NOT NULL,
-    status VARCHAR(30) NOT NULL,
-    tipo VARCHAR(30),
-    datasolicitacao DATE,
-    Idcliente INT NOT NULL,
-    idagenc INT NOT NULL
+  IdEmpr INT NOT NULL PRIMARY KEY,
+  TaxaJuros DECIMAL(5,2),
+  NConta INT NOT NULL,
+  Status VARCHAR(30) NOT NULL,
+  Tipo VARCHAR(30),
+  DataSolicitacao DATE,
+  IdCliente INT NOT NULL,
+  IdAgenc INT NOT NULL
 );
 
--- Inserções (DML) - Cliente
-INSERT INTO Cliente (Idcliente, telefone, cpf, email, rg, endereco, Nconta)
-VALUES (1, '9999991', '000000000001', 'anderson17@gmail.com', '0000001', 'Rua Alameda dos Anjos 714, Apto 604', 111);
+-- INSERTS
+INSERT INTO Cliente VALUES
+(1, '9999991', '000000000001', 'anderson17@gmail.com', '0000001', 'Rua Alameda dos Anjos 714, apto 604', 111, NULL),
+(2, '9999992', '000000000002', 'savinho0783@gmail.com', '0000002', 'Rua Jose das Caldas 073', 112, 32),
+(3, '9999993', '000000000003', 'toninho117@yahoo.com.br', '0000003', 'Rua Alameda dos Anjos 714, apto 601', 113, NULL),
+(4, '9999994', '000000000004', 'clarasantiago00@yahoo.com.br', '0000004', 'Rua Alameda dos Anjos 714, 604', 114, 34),
+(5, '9999995', '000000000005', 'cainaespiuca1708@gmail.com', '0000005', 'Rua Alameda dos Anjos 714, apto 601', 115, NULL),
+(6, '9999996', '000000000006', 'mateusoliveira@gmail.com', '0000006', 'Rua Alameda dos Anjos 714, apto 603', 116, 36);
 
-INSERT INTO Cliente (Idcliente, telefone, cpf, email, rg, endereco, Nconta, Idempr)
-VALUES (2, '9999992', '000000000002', 'Savinho0783@gmail.com', '0000002', 'Rua Jose das Caldas 073', 112, 32);
+INSERT INTO Funcionario VALUES
+(1, 'Estagiário', '1999-01-01', 'rickelmealexander@yahoo.com.br', 'Av. Recife 803, apto 801', 'Rickelme Alexander', '9999981', 1250.00, '2023-05-17', 1, 32),
+(2, 'Estagiário', '1997-01-01', 'rilari0807@gmail.com', 'Av. Recife 913, apto 501, bloco B', 'Rilary Silva', '9999982', 1250.00, '2023-01-13', 1, 34),
+(3, 'Gerente', '1997-02-22', 'matheuss@yahoo.com.br', 'Av. Recife 914, apto 502', 'Matheus Santos', '9999823', 7300.00, '2021-01-13', 1, 36),
+(4, 'Gerente', '1987-05-22', 'fabsilva@yahoo.com.br', 'Rua Dr. Aniceto Varejão 702, apto 101', 'Fabiola Silva', '9999753', 6900.00, '2021-01-13', 2, NULL),
+(5, 'Estagiário', '1999-05-22', 'andersonnunes@yahoo.com.br', 'Rua Dr. Aniceto Varejão 904, apto 105', 'Anderson Nunes', '99995753', 1300.00, '2023-01-13', 2, NULL);
 
-INSERT INTO Cliente (Idcliente, telefone, cpf, email, rg, endereco, Nconta)
-VALUES (3, '9999993', '000000000003', 'Toninho117@yahoo.com.br', '0000003', 'Rua Alameda dos Anjos 714, Apto 601', 113);
+INSERT INTO ContaBancaria VALUES
+(111, 'ContaCorrente', 938.00, '2022-02-01', 1, 901),
+(112, 'ContaPoupanca', 1030.00, '2022-05-01', 2, 902),
+(113, 'ContaCorrente', 2950.00, '2021-05-01', 3, 903),
+(114, 'ContaPoupanca', 95.00, '2021-05-07', 4, NULL),
+(115, 'ContaCorrente', 9500.00, '2019-05-07', 5, NULL),
+(116, 'ContaPoupanca', 120.00, '2023-05-07', 6, NULL);
 
-INSERT INTO Cliente (Idcliente, telefone, cpf, email, rg, endereco, Nconta, Idempr)
-VALUES (4, '9999994', '000000000004', 'Clarasantiago00@yahoo.com.br', '0000004', 'Rua Alameda dos Anjos 714, 604', 114, 34);
+INSERT INTO ContaPoupanca VALUES
+('tarifa130', 'cheque 800', '1984-02-03', 2.00, 980.00, 1),
+('tarifa115', 'cheque 720', '1999-02-03', 2.00, 1030.00, 2),
+('tarifa110', 'cheque 720', '1995-02-03', 2.00, 8000.00, 1);
 
-INSERT INTO Cliente (Idcliente, telefone, cpf, email, rg, endereco, Nconta)
-VALUES (5, '9999995', '000000000005', 'cainaespiuca1708@gmail.com', '0000005', 'Rua Alameda dos Anjos 714, Apto 601', 115);
+INSERT INTO ContaCorrente VALUES
+('1999-04-05', 'cheque 800', 980.00, 2.00, 'tarifa130', 1),
+('1999-03-05', 'cheque 800', 1250.00, 2.00, 'tarifa115', 2),
+('2000-03-05', 'cheque 800', 1250.00, 2.00, 'tarifa110', 1);
 
-INSERT INTO Cliente (Idcliente, telefone, cpf, email, rg, endereco, Nconta, Idempr)
-VALUES (6, '9999996', '000000000006', 'mateusoliveira@gmail.com', '0000006', 'Rua Alameda dos Anjos 714, Apto 603', 116, 36);
+INSERT INTO AgenciaBanc VALUES
+(1, 'Agencia Uno', '87028922', 'Rua Bananil', 'agenciauno@gmail.com', '08:00 - 18:00', 1, 1, 1, 'tarifa130', '2023-04-10'),
+(2, 'Agencia Two', '87696924', 'Rua Bostil', 'agenciatwo@gmail.com', '08:00 - 18:00', 2, 2, 2, 'tarifa115', '2022-05-10'),
+(3, 'Agencia Third', '87695438', 'Rua Bostil', 'agenciatwo@gmail.com', '08:00 - 18:00', 3, 3, 3, 'tarifa110', '2021-05-10');
+
+INSERT INTO Emprestimo VALUES
+(1, 2.44, 111, 'Ativo', 'Consignado', '2023-10-05', 1, 1),
+(2, 3.54, 112, 'Ativo', 'Consignado', '2022-03-06', 2, 2),
+(3, 3.54, 113, 'Ativo', 'Consignado', '2023-02-04', 3, 3);
+
+INSERT INTO Investimento VALUES
+(1, 'Fundos de Investimentos', 2779.00, '2023-02-01', '2077-02-01', 'alguma coisa', 1, 1),
+(2, 'Fundos de Investimentos', 2222.00, '2024-03-05', '2099-03-05', 'alguma coisa', 2, 2),
+(3, 'Fundos de Investimentos', 2333.00, '2023-04-03', '2033-04-02', 'alguma coisa', 3, 3);
+
+INSERT INTO Transacao VALUES
+(1, '2023-10-01', 'DOC', 34566.00, 'alguma descrição', 111, 1),
+(2, '2023-09-03', 'DOC', 54346.00, 'alguma descrição', 112, 2),
+(3, '2023-04-05', 'TED', 54346.00, 'alguma descrição', 113, 3);
